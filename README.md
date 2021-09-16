@@ -1,16 +1,16 @@
 # テーブル設計
 
 ## users テーブル
-| Column                 | Type   | Options     |
-| ---------------------- | ------ | ----------- |
-| nickname               | string | null: false |
-| email                  | string | null: false |
-| encrypted_password     | string | null: false |
-| last_name              | string | null: false |   
-| first_name             | string | null: false |
-| last_name_kana         | string | null: false |
-| first_name_kana        | string | null: false |
-| birthday               | date   | null: false |
+| Column                 | Type   | Options                  |
+| ---------------------- | ------ | -------------------------|
+| nickname               | string | null: false              |
+| email                  | string | null: false,unique: true |
+| encrypted_password     | string | null: false              |
+| last_name              | string | null: false              |   
+| first_name             | string | null: false              |
+| last_name_kana         | string | null: false              |
+| first_name_kana        | string | null: false              |
+| birthday               | date   | null: false              |
 
 ### Association
 
@@ -28,7 +28,7 @@
 | area_id              | integer   | null: false                    |
 | shopping_day_id      | integer   | null: false                    |
 | price                | integer   | null: false                    |
-| user                 | references| nu;;: false, foreign_key: true |
+| user                 | references| null: false, foreign_key: true |
 
 ### Association
 
@@ -53,14 +53,15 @@
 | Column      | Type      | Options                        |
 | ----------- | --------- | ------------------------------ |
 | postal_code | string    | null: false                    |
-| area_id     | string    | null: false                    |
+| area_id     | integer   | null: false                    |
 | city        | string    | null: false                    |
 | address     | string    | null: false                    |
-| building    | string    | null: false                    |
+| building    | string    |                    |
 | phone       | string    | null: false                    |
 | order       | references| null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :order
+
 
