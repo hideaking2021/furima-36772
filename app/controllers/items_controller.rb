@@ -10,13 +10,13 @@ class ItemsController < ApplicationController
   def edit
   end
 
-  # def create
+  def create
     # @Item = Item.new(item_params)
     # if @Item.save
       # redirect_to root_path
     # else
       # render :new
     # end
-  # end
+  end
 
 end
