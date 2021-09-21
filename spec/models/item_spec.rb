@@ -102,6 +102,12 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Shopping day must be other than 1")
       end
 
+      it '価格が空では登録できない' do
+        @item.price = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank", "Price is invalid", "Price is not included in the list")
+      end
+
       it '価格は300円未満なら保存できない' do
         @item.price = 299
         @item.valid?
@@ -138,6 +144,10 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
 
+      it 'userが紐付いていなければ出品できない' do
+        item = FactoryBot.create(:item) 
+        expect(item).to be_valid
+      end
     end
   end
 
