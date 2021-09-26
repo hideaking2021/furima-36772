@@ -10,6 +10,8 @@ class OrderDelivery
     validates :address
     validates :phone,format: { with: /\A[0-9]{11}\z/}
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
 

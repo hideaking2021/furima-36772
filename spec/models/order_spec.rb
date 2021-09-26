@@ -15,10 +15,17 @@ RSpec.describe Order, type: :model do
         expect(@order_delivery).to be_valid
       end
 
+
       it '電話番号は、10桁以上11桁以内の半角数値のみ保存可能' do
         @order_delivery.phone = '09012345678'
         expect(@order_delivery).to be_valid
       end
+
+      it 'buildingが空でも購入できる' do
+        @order_delivery.building = ''
+        expect(@order_delivery).to be_valid
+      end
+
     end
 
 
@@ -53,7 +60,7 @@ RSpec.describe Order, type: :model do
         expect(@order_delivery.errors.full_messages).to include("Area must be other than 1")
       end
 
-      
+
       it '市区町村が空だと保存できない' do
         @order_delivery.city = ''
         @order_delivery.valid?
@@ -73,8 +80,30 @@ RSpec.describe Order, type: :model do
         @order_delivery.valid?
         expect(@order_delivery.errors.full_messages).to include("Phone can't be blank")
       end
+      it '電話番号が9桁以下では購入できない' do
+        @order_delivery.phone = '123456789'
+        @order_delivery.valid?
+        expect(@order_delivery.errors.full_messages).to include("Phone is invalid")
+      end
+      it '電話番号が12桁以上では購入できない' do
+        @order_delivery.phone = '123456789098'
+        @order_delivery.valid?
+        expect(@order_delivery.errors.full_messages).to include("Phone is invalid")
+      end
 
 
+      it 'user_idが空だと購入できない' do
+        @order_delivery.user_id = ''
+        @order_delivery.valid?
+        expect(@order_delivery.errors.full_messages).to include("User can't be blank")
+      end
+
+
+      it 'item_idが空だと購入できない' do
+        @order_delivery.item_id = ''
+        @order_delivery.valid?
+        expect(@order_delivery.errors.full_messages).to include("Item can't be blank")
+      end
 
   end
 end
